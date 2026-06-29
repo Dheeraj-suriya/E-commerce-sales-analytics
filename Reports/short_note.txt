@@ -1,0 +1,7 @@
+## Short Note: Most Surprising Finding
+
+The most surprising finding from this analysis was that **São Paulo (SP)** generated significantly higher revenue than every other state, making it the company's strongest market. 
+
+Another notable insight was that **56.5% of all customer reviews were 5-star ratings**, indicating high customer satisfaction. 
+
+Additionally, the **Health & Beauty** category emerged as the top revenue-generating product category, while **November 2017** recorded the highest monthly sales, highlighting the impact of seasonal demand and promotional campaigns.

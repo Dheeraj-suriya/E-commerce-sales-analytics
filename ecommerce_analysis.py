@@ -149,38 +149,7 @@ print(sales.shape)
 
 print("\nMaster Dataset Columns:")
 print(sales.columns.tolist())
-# =====================================
-# MASTER DATASET CREATION
-# =====================================
 
-sales = items.merge(
-    orders,
-    on="order_id"
-)
-
-sales = sales.merge(
-    customers,
-    on="customer_id"
-)
-
-sales = sales.merge(
-    products,
-    on="product_id"
-)
-
-sales = sales.merge(
-    reviews[["order_id", "review_score"]],
-    on="order_id",
-    how="left"
-)
-
-print("\nMaster Dataset Created Successfully!")
-
-print("\nMaster Dataset Shape:")
-print(sales.shape)
-
-print("\nMaster Dataset Columns:")
-print(sales.columns.tolist())
 # =====================================
 # FEATURE ENGINEERING
 # =====================================
@@ -340,56 +309,56 @@ plt.show()
 # =====================================
 
 order_value = (
-    sales.groupby("order_id")
-    ["revenue"]
+    sales.groupby("order_id")["revenue"]
     .sum()
 )
 
-avg_order_value = round(
+average_order_value = round(
     order_value.mean(), 2
 )
 
 print("\nAverage Order Value:")
 
-print(f"₹ {avg_order_value}")
+print(f"₹ {average_order_value}")
+
+print("\nOrder Value Statistics:")
+
+print(order_value.describe())
 # =====================================
 # VISUALIZATION 4
-# AVERAGE ORDER VALUE TREND
+# ORDER VALUE DISTRIBUTION
 # =====================================
 
-monthly_aov = (
-    sales.groupby(
-        sales["order_purchase_timestamp"]
-        .dt.to_period("M")
-    )["revenue"]
-    .mean()
-)
+plt.figure(figsize=(10,6))
 
-plt.figure(figsize=(12,6))
-
-monthly_aov.plot(
-    marker="o"
+plt.hist(
+    order_value,
+    bins=30
 )
 
 plt.title(
-    "Average Order Value Trend"
+    "Order Value Distribution"
 )
 
-plt.xlabel("Month")
+plt.xlabel(
+    "Order Value"
+)
 
-plt.ylabel("Average Order Value")
-
-plt.grid(True)
+plt.ylabel(
+    "Number of Orders"
+)
 
 plt.tight_layout()
+
+plt.savefig(
+    "dashboard/order_value_distribution.png"
+)
 
 plt.show()
 # =====================================
 # QUESTION 5
-# REVIEW SCORE DISTRIBUTION
+# CUSTOMER REVIEW SCORE DISTRIBUTION
 # =====================================
-
-print("\nReview Score Distribution:\n")
 
 review_distribution = (
     sales["review_score"]
@@ -397,75 +366,123 @@ review_distribution = (
     .sort_index()
 )
 
+print("\nCustomer Review Score Distribution:\n")
+
 print(review_distribution)
-# =====================================
-# VISUALIZATION 5
-# REVIEW SCORE HISTOGRAM
-# =====================================
 
-plt.figure(figsize=(10,5))
-
-sns.histplot(
-    sales["review_score"],
-    bins=5
-)
-
-plt.title(
-    "Review Score Distribution"
-)
-
-plt.xlabel("Review Score")
-
-plt.ylabel("Count")
-
-plt.tight_layout()
-
-plt.show()
-# =====================================
-# KPI DASHBOARD METRICS
-# =====================================
-
-total_revenue = round(
-    sales["revenue"].sum(), 2
-)
-
-total_orders = (
-    sales["order_id"]
-    .nunique()
-)
-
-average_review = round(
+average_review_score = round(
     sales["review_score"].mean(), 2
 )
 
-best_category = (
-    sales.groupby(
-        "product_category_name_english"
-    )["revenue"]
-    .sum()
-    .idxmax()
+print(f"\nAverage Review Score : {average_review_score}")
+# =====================================
+# VISUALIZATION 5
+# CUSTOMER REVIEW SCORE PIE CHART
+# =====================================
+
+plt.figure(figsize=(8,8))
+
+plt.pie(
+    review_distribution,
+    labels=review_distribution.index,
+    autopct="%1.1f%%",
+    startangle=90
 )
 
-best_month = (
-    sales.groupby("month")
-    ["revenue"]
-    .sum()
-    .idxmax()
+plt.title(
+    "Customer Review Score Distribution"
+)
+
+plt.tight_layout()
+
+plt.savefig(
+    "dashboard/review_score_distribution.png"
+)
+
+plt.show()
+# =====================================
+# VISUALIZATION 6
+# HEATMAP - CATEGORY VS MONTH
+# =====================================
+
+heatmap_data = pd.pivot_table(
+    sales,
+    values="revenue",
+    index="product_category_name_english",
+    columns="month",
+    aggfunc="sum",
+    fill_value=0
+)
+
+month_order = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+]
+
+heatmap_data = heatmap_data.reindex(
+    columns=month_order
+)
+
+plt.figure(figsize=(14,10))
+
+sns.heatmap(
+    heatmap_data,
+    cmap="YlGnBu"
+)
+
+plt.title(
+    "Revenue by Product Category and Month"
+)
+
+plt.xlabel(
+    "Month"
+)
+
+plt.ylabel(
+    "Product Category"
+)
+
+plt.tight_layout()
+
+plt.savefig(
+    "dashboard/category_month_heatmap.png"
+)
+
+plt.show()
+# =====================================
+# KPI DASHBOARD
+# =====================================
+
+total_revenue = round(
+    sales["revenue"].sum(),
+    2
+)
+
+total_orders = sales["order_id"].nunique()
+
+average_review = round(
+    sales["review_score"].mean(),
+    2
 )
 
 print("\n" + "="*60)
 print("KPI DASHBOARD")
 print("="*60)
 
-print(f"Total Revenue      : {total_revenue:,.2f}")
-
+print(f"Total Revenue      : ₹ {total_revenue:,.2f}")
 print(f"Total Orders       : {total_orders}")
-
 print(f"Average Review     : {average_review}")
 
-print(f"Best Category      : {best_category}")
-
-print(f"Best Month         : {best_month}")
 # =====================================
 # KPI SUMMARY
 # =====================================
@@ -492,6 +509,10 @@ plt.bar(
 plt.title(
     "Business KPI Summary"
 )
+
+plt.xlabel("KPI")
+
+plt.ylabel("Value")
 
 plt.tight_layout()
 

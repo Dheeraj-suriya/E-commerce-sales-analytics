@@ -1,0 +1,39 @@
+# BUSINESS INSIGHTS REPORT
+
+## E-Commerce Sales Analysis
+
+### 1. Highest Revenue Product Category
+
+The **Health & Beauty** category generated the highest revenue among all product categories, followed by **Watches & Gifts** and **Bed, Bath & Table**. These categories consistently outperformed the others, indicating strong customer demand and purchasing behavior. The company should continue investing in these high-performing categories through targeted promotions, better inventory management, and the introduction of new products.
+
+### 2. Peak Sales Month
+
+The monthly revenue analysis revealed that **November 2017** recorded the highest sales during the analysis period. This spike is likely associated with seasonal shopping trends and promotional events. The business should prepare sufficient inventory and strengthen marketing campaigns before this period to maximize future revenue.
+
+### 3. Best Performing Region
+
+Among all states, **São Paulo (SP)** generated the highest revenue by a significant margin, followed by **Rio de Janeiro (RJ)** and **Minas Gerais (MG)**. This indicates that the Southeast region is the company's strongest market. Expanding logistics, improving delivery efficiency, and focusing marketing efforts in these regions can further increase customer satisfaction and sales.
+
+### 4. Average Order Value Trend
+
+The order value distribution shows that the majority of customer purchases fall within the lower price range, while only a small percentage of orders have very high values. This indicates that customers generally prefer affordable products. To increase the average order value, the company should introduce product bundles, cross-selling strategies, personalized recommendations, and discounts on higher-value purchases.
+
+### 5. Customer Review Score Distribution
+
+Customer satisfaction is generally high. The review score analysis shows that **56.5%** of customers gave **5-star** ratings, **19.0%** gave **4-star** ratings, **8.4%** gave **3-star** ratings, **3.4%** gave **2-star** ratings, and **12.7%** gave **1-star** ratings. While the majority of customers are satisfied, analyzing the reasons behind lower ratings can help improve product quality, delivery services, and overall customer experience.
+
+---
+
+# Business Recommendations
+
+* Continue investing in the **Health & Beauty**, **Watches & Gifts**, and **Bed, Bath & Table** categories, as they contribute the highest revenue.
+* Increase inventory and promotional campaigns before **November**, the peak sales month, to maximize seasonal demand.
+* Strengthen logistics and customer engagement in **São Paulo (SP)**, **Rio de Janeiro (RJ)**, and **Minas Gerais (MG)**, which are the top-performing regions.
+* Increase the average order value through product bundles, cross-selling, personalized recommendations, and targeted discounts.
+* Regularly monitor customer reviews and address issues raised in low-rated feedback to maintain high customer satisfaction and improve service quality.
+
+---
+
+## Conclusion
+
+This analysis highlights the key drivers of revenue, regional performance, customer purchasing behavior, and satisfaction levels within the Olist Brazilian E-Commerce dataset. The insights and recommendations provided can help the business optimize marketing strategies, improve operational efficiency, and increase overall profitability.

@@ -137,7 +137,7 @@ The dashboard includes:
 
 ## Author
 
-Mahendrakar Premkumar
+Dheeraj Suriya
 
 B.Tech Computer Science & Engineering (AI & ML)
 
